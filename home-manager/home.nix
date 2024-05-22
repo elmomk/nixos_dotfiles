@@ -144,9 +144,9 @@
     #hugo # static site generator
     #glow # markdown previewer in terminal
 
-    #btop  # replacement of htop/nmon
-    #iotop # io monitoring
-    #iftop # network monitoring
+    btop  # replacement of htop/nmon
+    iotop # io monitoring
+    iftop # network monitoring
 
     ## system call monitoring
     strace # system call monitoring
@@ -165,7 +165,7 @@
     waybar
     hyprpaper
     wofi
-    sxhkd
+    # sxhkd
 
     spotify
 
