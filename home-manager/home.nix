@@ -27,7 +27,7 @@
     source = ./dotfiles/waybar;
     recursive = true;
   };
-  home.file.".config/sxhkd/sxhkdrc".source = ./dotfiles/sxhkdrc/.config/sxhkd/sxhkdrc;
+  home.file.".config/sxhkd/sxhkdrc".source = ./dotfiles/sxhkdrc/.config/leftwm/sxhkd/sxhkdrc;
   #
   # home.file.".config/dunst" = {
   #   source = ./dotfiles/dunst/.config/dunst;
