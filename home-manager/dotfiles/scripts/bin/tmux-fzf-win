@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if ! env | grep -i tmux >/dev/null; then
+  echo "must be run in tmux"
+  echo "is meant to swap windows"
+  exit 1
+fi
+
+SESSION=$(tmux list-windows -a | cut -d: -f1,2 | fzf --cycle --preview-window=right:60%:wrap --preview "tmux capture-pane -ep -t {}" --preview-label="Swap current window with selected one")
+
+tmux swap-window -t "$SESSION"
+
+
+

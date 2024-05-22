@@ -1,0 +1,113 @@
+# Single and Dual screen
+
+set $mode_display (h) HDMI on, (y) HDMI off
+mode "$mode_display" {
+  bindsym h exec --no-startup-id xrandr --output HDMI-1 --auto --right-of eDP-1 --primary, mode "default"
+  bindsym y exec --no-startup-id xrandr --output HDMI-1 --auto --off, mode "default"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  }
+
+bindsym $mod+x mode "$mode_display"
+
+bindsym control+$alt+X mode "$mode_system"
+
+set $mode_system System (k) lock, (l) logout, (u) suspend, (h) hibernate, (r) reboot, (s) shutdown
+mode "$mode_system" {
+    bindsym k exec --no-startup-id /usr/bin/i3lock -c 000000, mode "default"
+    bindsym l exec --no-startup-id i3-msg exit, mode "default"
+    bindsym u exec --no-startup-i systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym s exec --no-startup-id systemctl poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+exec --no-startup-id xrandr --auto --output HDMI-1 --right-of eDP-1
+
+
+exec --no-startup-id  xinput set-prop "Kensington USB Orbit" "libinput Button Scrolling Button" 3
+exec --no-startup-id xfce4-clipman
+#
+# screenshots
+bindsym Print exec --no-startup-id xfce4-screenshooter
+
+bindsym $mod+e layout toggle tabbed splitv
+
+set $firstMonitor eDP-1
+set $secondMonitor HDMI-1
+
+workspace 1 output $firstMonitor
+workspace 2 output $firstMonitor
+workspace 3 output $firstMonitor
+workspace 4 output $firstMonitor
+workspace 5 output $firstMonitor
+workspace 6 output $secondMonitor
+workspace 7 output $secondMonitor
+workspace 8 output $secondMonitor
+workspace 9 output $secondMonitor
+workspace 10 output $secondMonitor
+
+# Moving workspaces between screens
+bindsym $mod+p move workspace to output right
+
+## next/previous workspace
+#
+#bindsym Mod1+Tab workspace next
+#bindsym Mod1+Shift+Tab workspace prev
+#bindsym $mod+Tab workspace back_and_forth
+
+##navigate workspaces next / previous
+#bindsym Mod1+Ctrl+Right workspace next
+#bindsym Mod1+Ctrl+Left workspace prev
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+ # Assign application to start on a specific workspace
+ # you can find the class with the program xprop
+ 
+ # Workspace 1 browser related
+ assign [class="Keybase"]                            → 1
+ #assign [class="Chromium|Google-chrome"]                                             → 1
+ 
+ # Workspace 2 text editor related
+ #assign [class="sublime-text|sublime_text|Sublime_text|subl|Subl|subl3|Subl3"]       → 2
+ #assign [class="Xed|xed|Brackets|Atom|Code|Geany"]                                   → 2
+ 
+ # Workspace 3 Inkscape
+ #assign [class="Inkscape"]                                                           → 3
+ 
+ # Workspace 4 Gimp
+ #assign [class="Gimp"]                                                               → 4
+ 
+ # Workspace 5 Images and meld
+ #assign [class="ristretto|Ristretto|shotwell|Shotwell|Xviewer|Nitrogen"]             → 5
+ #assign [class="feh|gthumb|Gthumb|eog|Eog|Pinta|pixeluvo|Pixeluvo"]                  → 5
+ #assign [class="Meld"]                                                               → 5
+ 
+ # Workspace 6 all video related software
+ assign [class="Firefox"]                      → 6
+ for_window [class="Firefox"] move to workspace 6
+ #assign [class="Firefox|Vivaldi-stable|Vivaldi-snapshot|Opera"]                      → 6
+ #assign [class="Vlc|vlc"]                                                            → 6
+ 
+ # Workspace 7 virtual machines and settings
+ #assign [class="Vmplayer|VirtualBox"]                                               → 7
+ 
+ # Workspace 8 file managers
+ #assign [class="Nemo|Thunar|Caja|nautilus|Nautilus"]                                 → 8
+ 
+ # Workspace 9 email clients
+ #assign [class="Geary|Evolution"]                                                    → 9
+ 
+ # Workspace 10 music related
+ assign [class="Spotify|spotify"]                                                    → 10
+ #fix for spotify not moving to workspace 10
+ for_window [class="Spotify"] move to workspace 10
+ 
+

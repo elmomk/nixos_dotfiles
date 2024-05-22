@@ -1,0 +1,66 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Use custom format
+# format = '''
+# [┌───────────────────>](bold green)
+# [│](bold green)$directory$all
+# [└─>](bold green) '''
+
+[directory]
+truncation_length = 2
+# truncation_symbol = '...'
+# Replace the "❯" symbol in the prompt with "➜"
+# [character] # The name of the module we are configuring is "character"
+# success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[aws]
+style = "bold green"
+format = '| [$symbol$region]($style) '
+
+
+[azure]
+disabled = false
+format = "| [$symbol($subscription)]($style) "
+symbol = " "
+style = "blue bold"
+
+[kubernetes]
+disabled = true
+format = '[⛵$context on $namespace](purple) '
+#format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+#detect_extensions = ['yaml', 'yml']
+#detect_files = ['k8s']
+
+[container]
+style = "bold yellow dimmed"
+format ="[$symbol devtainer]($style) "
+symbol = "⬢"
+disabled = false
+
+# [git_branch]
+# symbol = '🌱 '
+# truncation_length = 4
+# truncation_symbol = ''
+# ignore_branches = ['master', 'main']
+
+[python]
+# symbol = 'py-'
+format = '[$symbol$version]($style) '
+python_binary = ['./venv/bin/python', 'python', 'python3', 'python2']
+
+[golang]
+# symbol = 'go-'
+
+[rust]
+# symbol = 'rs-'
+
+[terraform]
+symbol = "󱁢 "

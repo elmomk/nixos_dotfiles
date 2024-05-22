@@ -1,0 +1,16 @@
+# Add this line to .zshrc
+# [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
+
+[[ -f ~/.zshrc-work ]] && . ~/.zshrc-work
+[[ -f ~/.zshrc-fn ]] && . ~/.zshrc-fn
+
+alias scroll='xinput set-prop "Kensington USB Orbit" "libinput Button Scrolling Button" 3'
+
+#jellyfin
+# alias jellydf=
+alias jellystart='echo "lets get started"; sudo virsh start --domain jellyfin'
+alias jellyps='ssh jelly "docker-compose -f ~/Documents/docker-media-server/docker-compose.yml ps && echo "DISK SIZE" && df -hT /dev/vda1"'
+alias jellytree='ssh jelly "tree ~/Documents/content/content"'
+alias jellydocker='ssh jelly "docker-compose -f ~/Documents/docker-media-server/docker-compose.yml $@"'
+alias jstart='jellystart; sleep 90; jellyps; jellydocker start traefik'
+alias fixjelly='sudo rmdir /var/lib/libvirt/images && sudo ln -s /data/libvirt/images /var/lib/libvirt/'
