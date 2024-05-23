@@ -28,6 +28,9 @@
     source = ./dotfiles/waybar;
     recursive = true;
   };
+# TODO: hyprpaper
+# TODO: Chinese input
+# TODO: decent Chinese font
 
   home.file.".config/dunst" = {
     source = ./dotfiles/dunst/.config/dunst;
@@ -142,9 +145,9 @@
     usbutils # lsusb
 
     gcc
-    kitty
+    # kitty
     waybar
-    hyprpaper
+    # hyprpaper
     wofi
     # sxhkd
 

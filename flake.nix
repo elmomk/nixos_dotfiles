@@ -15,6 +15,7 @@
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       };
+    # codeium.url = "github.com/Exafunction/codeium.nvim";
   };
 
   outputs = { self, nixpkgs, home-manager, hyprland-plugins, ... }@inputs: {
