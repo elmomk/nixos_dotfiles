@@ -1,30 +1,11 @@
 {
   "layer": "top",
-    "modules-left": ["custom/arch", "hyprland/workspaces"],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["backlight", "pulseaudio", "bluetooth", "network", "battery"],
-    "custom/arch": {
-      "format": "  ",
-      "tooltip": false,
-      "on-click": "sh $HOME/.config/rofi/bin/powermenu"
-    },
-    "hyprland/workspaces": {
-      "format": "{name}",
-      "format": "{icon}",
-      "tooltip": false,
-      "all-outputs": true,
-      "format-icons": {
-        "active": "",
-        "default": ""
-      }
+    "modules-right": ["pulseaudio", "bluetooth", "network"],
     },
     "clock": {
       "format": "<span color='#b4befe'> </span>{:%H:%M}",
-    },
-    "backlight": {
-      "device": "intel_backlight",
-      "format": "<span color='#b4befe'>{icon}</span> {percent}%",
-      "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "pulseaudio": {
       "format": "<span color='#b4befe'>{icon}</span> {volume}%",
@@ -44,17 +25,11 @@
       "tooltip-format-enumerate-connected": "{device_alias}   {device_address}"
     },
     "network": {
-      "interface": "wlo1",
+      "interface": "eno0",
       "format": "{ifname}",
       "format-wifi": "<span color='#b4befe'> </span>{essid}",
       "format-ethernet": "{ipaddr}/{cidr} ",
       "format-disconnected": "<span color='#b4befe'>󰖪 </span>No Network",
-      "tooltip": false,
-    },
-    "battery": {
-      "format": "<span color='#b4befe'>{icon}</span> {capacity}%",
-      "format-icons": ["", "", "", "", "", "", "", "", "", ""],
-      "format-charging": "<span color='#b4befe'></span> {capacity}%",
       "tooltip": false,
     },
 }

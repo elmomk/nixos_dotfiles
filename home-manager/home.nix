@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   dconf.settings = {
@@ -23,36 +23,16 @@
   };
   # home.file.".config/leftwm/config.ron".source = ./dotfiles/leftwm/.config/leftwm/config.ron;
 
+  home.file.".config/hypr/hyprland.conf".source = ./dotfiles/hyprland/hyprland.conf;
   home.file.".config/waybar" = {
     source = ./dotfiles/waybar;
     recursive = true;
   };
-  # home.file.".config/sxhkd/sxhkdrc".source = ./dotfiles/sxhkdrc/.config/leftwm/sxhkd/sxhkdrc;
-  #
-  # home.file.".config/dunst" = {
-  #   source = ./dotfiles/dunst/.config/dunst;
-  #   recursive = true;
-  # };
 
-  # home.file.".config/rofi" = {
-  #   source = ./dotfiles/rofi;
-  #   recursive = true;
-  # };
-
-  # link the configuration file in current directory to the specified location in home directory
-  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
-
-  # link all files in `./scripts` to `~/.config/i3/scripts`
-  # home.file.".config/i3/scripts" = {
-  #   source = ./scripts;
-  #   recursive = true;   # link recursively
-  #   executable = true;  # make all files executable
-  # };
-
-  # encode the file content in nix configuration file directly
-  # home.file.".xxx".text = ''
-  #     xxx
-  # '';
+  home.file.".config/dunst" = {
+    source = ./dotfiles/dunst/.config/dunst;
+    recursive = true;
+  };
 
   # set cursor size and dpi for 4k monitor
   #xresources.properties = {
@@ -147,6 +127,7 @@
     btop  # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
+    htop
 
     ## system call monitoring
     strace # system call monitoring
@@ -174,6 +155,15 @@
     docker-compose
     dive
     distrobox
+    kubectl
+    minikube
+    kubie
+
+    # audio
+    pavucontrol
+
+    pipewire
+    wireplumber
   ];
 
   # basic configuration of git, please change to your own
@@ -250,14 +240,64 @@
     # TODO add your custom bashrc here
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+      eval "$(zoxide init bash)"
+      #clamav
+      scandir() {
+        # check first argument
+        # if empty, scan current directory
+        # if not empty, scan that directory
+        RECURSIVE=""
+        if [ -z "$1" ]
+        then
+          location=$(pwd)
+        else
+          location=$1
+        fi
+        # check second argument equals r, then scan recursively
+        if [ "$2" = "r" ]
+        then
+          echo "recursive"
+          RECURSIVE="-r"
+        fi
+          echo "start scanning $location"
+          docker run -it --rm \
+          --mount type=bind,source=$location,target=/scandir \
+          clamav/clamav:unstable \
+          clamscan /scandir $RECURSIVE
+      }
+      
+      tnow () {
+          tmux attach -t `tls | awk -F':' '{print $1}' | head -n1`
+      }
+      
+      wttr () {
+          echo "checking weather"
+          if [[ -z $1 ]]; then
+              curl  wttr.in/Tervuren
+          else
+              curl  wttr.in/$1
+          fi
+      }
+    testvim() {
+        NVIM_APPNAME="testvim" nvim $@
+    }
+
     '';
 
     # set some aliases, feel free to add more or remove some
-    #shellAliases = {
-    #  k = "kubectl";
+    shellAliases = {
+     k = "kubectl";
+     vi = "nvim";
+     vim = "nvim";
+     # jellystart = " sudo virsh start --domain jellyfin";
+     # jellyps = "ssh jelly 'docker-compose -f ~/Documents/docker-media-server/docker-compose.yml ps && echo "DISK SIZE" && df -hT /dev/vda1'";
+     # jellytree = "ssh jelly "tree ~/Documents/content/content"";
+     # jellydocker = 'ssh jelly "docker-compose -f ~/Documents/docker-media-server/docker-compose.yml $@"';
+     # jstart = 'jellystart; sleep 90; jellyps; jellydocker start traefik';
+     # fixjelly='sudo rmdir /var/lib/libvirt/images && sudo ln -s /data/libvirt/images /var/lib/libvirt/';
     #  urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
     #  urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
-    #};
+    };
   };
 
   # This value determines the home Manager release that your
@@ -273,43 +313,4 @@
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-#   wayland.windowManager.hyprland = {
-# extraConfig = ''test'';
-# settings = {
-# general = {
-# gaps_in = 0;
-# gaps_out = 0;
-# border_size = 20;
-# };
-# };
-# };
-
-  wayland.windowManager.hyprland.settings = {
-    "$mod" = "SUPER";
-    bind =
-      [
-        "$mod, F, exec, firefox"
-        "$mod, J, exec, alacritty"
-        ", Print, exec, grimblast copy area"
-      ]
-      ++ (
-        # workspaces
-        # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-        builtins.concatLists (builtins.genList (
-            x: let
-              ws = let
-                c = (x + 1) / 10;
-              in
-                builtins.toString (x + 1 - (c * 10));
-            in [
-              "$mod, ${ws}, workspace, ${toString (x + 1)}"
-              "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-            ]
-          )
-          10)
-      );
-  };
-  wayland.windowManager.hyprland.plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-  ];
 }

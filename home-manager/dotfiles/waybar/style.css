@@ -10,7 +10,7 @@ window#waybar {
   background: transparent;
 }
 
-#custom-arch, #workspaces {
+##workspaces {
   border-radius: 5px;
   background-color: #11111b;
   color: #b4befe;
@@ -21,10 +21,8 @@ window#waybar {
   padding-right: 10px;
 }
 
-#custom-arch {
-  font-size: 20px;
-  margin-left: 15px;
-  color: #b4befe;
+#workspaces button.visible {
+  color: #FFA500;
 }
 
 #workspaces button {
@@ -32,7 +30,7 @@ window#waybar {
   color: #b4befe;
 }
 
-#clock, #backlight, #pulseaudio, #bluetooth, #network, #battery{
+#clock, #pulseaudio, #bluetooth, #network{
   border-radius: 10px;
   background-color: #11111b;
   color: #cdd6f4;

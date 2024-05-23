@@ -13,12 +13,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-# Host(`traefik.local`)"
-# Host(`jelly.local`)"
-# Host(`ombi.local`)"
-# Host(`deluge.local`)"
-# Host(`sonarr.local`)"
-# Host(`radarr.local`)"
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.hosts = {
@@ -39,15 +33,15 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  fonts.fontconfig.defaultFonts.sansSerif = [
-  "Noto Sans CJK SC"
-  "HanaMinA"
-  "HanaMinB"
-];
+#   fonts.fontconfig.defaultFonts.sansSerif = [
+#   "Noto Sans CJK SC"
+#   "HanaMinA"
+#   "HanaMinB"
+# ];
 
   ## Chinese input
-  #i18n.inputMethod.enabled = "ibus";
-  #i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
+  i18n.inputMethod.enabled = "ibus";
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -207,7 +201,7 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
   networking.stevenblack = {
-    enable = true;
+    enable = false;
     block = [ "fakenews" "gambling" "porn" ];
   };
 
