@@ -28,9 +28,6 @@
     source = ./dotfiles/waybar;
     recursive = true;
   };
-# TODO: hyprpaper
-# TODO: Chinese input
-# TODO: decent Chinese font
 
   home.file.".config/dunst" = {
     source = ./dotfiles/dunst/.config/dunst;
@@ -159,6 +156,9 @@
     dive
     distrobox
     kubectl
+    terraform
+    opentofu
+    ansible
     minikube
     kubie
 
@@ -167,6 +167,11 @@
 
     pipewire
     wireplumber
+    brave
+    #TODO: get it working on wayland
+    # simplescreenrecorder
+    # wl-screenrec
+    xfce.thunar
   ];
 
   # basic configuration of git, please change to your own
