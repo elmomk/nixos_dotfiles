@@ -11,7 +11,6 @@
   home.username = "mo";
   home.homeDirectory = "/home/mo";
 
-  #TODO: look into codeium
   home.file.".config/nvim" = {
     source = ./dotfiles/mo-vim/.config/nvim;
     recursive = true;
@@ -178,11 +177,6 @@
     wireplumber
     brave
     xfce.thunar
-    #TODO: get it working on wayland
-    # simplescreenrecorder
-    # wl-screenrec
-    #TODO:
-    # shotman #screenshot
   ];
 
   # basic configuration of git, please change to your own
