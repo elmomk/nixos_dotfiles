@@ -45,6 +45,13 @@
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
+    grim
+    slurp
+    wl-clipboard
+    wf-recorder
+    vlc
+    feh
+    # swaylock
 
     steam-run
     neofetch
@@ -299,8 +306,9 @@
     # set some aliases, feel free to add more or remove some
     shellAliases = {
      k = "kubectl";
-     vi = "nvim";
-     vim = "nvim";
+     # too lazy to translate nvim config to nix
+     vi = "steam-run nvim";
+     vim = "steam-run nvim";
      # jellystart = " sudo virsh start --domain jellyfin";
      # jellyps = "ssh jelly 'docker-compose -f ~/Documents/docker-media-server/docker-compose.yml ps && echo "DISK SIZE" && df -hT /dev/vda1'";
      # jellytree = "ssh jelly "tree ~/Documents/content/content"";
