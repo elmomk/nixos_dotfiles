@@ -173,10 +173,6 @@
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
 
-  #TODO: fix codeium for neovim 
-  # try using a flake: https://github.com/Exafunction/codeium.nvim/blob/main/flake.nix
-  # programs.nix-ld.enable = true;
-  
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
