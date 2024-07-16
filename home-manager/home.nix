@@ -303,7 +303,7 @@
      # too lazy to translate nvim config to nix
      vi = "steam-run nvim";
      vim = "steam-run nvim";
-     update = "echo 'flake update'; nix flake update -I $HOME/nixos-config && echo 'nixos rebuild switch'; sudo nixos-rebuild switch";
+     update = "if [[ $(pwd | grep 'nixos-config') ]];then echo 'nixos-config';else z nixos-config; fi; echo 'flake update'; nix flake update -I $HOME/nixos-config &&  if [[ $(git status | grep 'modified') ]]; then echo 'nixos rebuild switch'; git diff; sudo nixos-rebuild switch;else echo 'No changes detected';fi";
      # jellystart = " sudo virsh start --domain jellyfin";
      # jellyps = "ssh jelly 'docker-compose -f ~/Documents/docker-media-server/docker-compose.yml ps && echo "DISK SIZE" && df -hT /dev/vda1'";
      # jellytree = "ssh jelly "tree ~/Documents/content/content"";
