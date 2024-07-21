@@ -44,6 +44,9 @@
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
+#TODO: eid-mw not responding to cardreader being plugged in -> debug
+    nss
+    eid-mw
     grim
     slurp
     wl-clipboard
